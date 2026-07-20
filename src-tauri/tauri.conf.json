@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "小决定 Desktop",
+  "version": "0.1.0",
+  "identifier": "cn.xiaojueding.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "小决定 Desktop",
+        "width": 1160,
+        "height": 760,
+        "minWidth": 980,
+        "minHeight": 620,
+        "resizable": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "publisher": "小决定 Desktop",
+    "copyright": "Copyright 2026 小决定 Desktop",
+    "category": "Utility"
+  }
+}
