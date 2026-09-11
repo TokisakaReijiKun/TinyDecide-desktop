@@ -6,6 +6,8 @@ contextBridge.exposeInMainWorld('desktop', {
   setAutoStart: (enabled) => ipcRenderer.invoke('scheduler:autostart', enabled),
   acknowledgeResults: (ids) => ipcRenderer.invoke('scheduler:ack', ids),
   clearScheduledHistory: () => ipcRenderer.invoke('scheduler:clear-history'),
+  saveCountdowns: (countdowns) => ipcRenderer.invoke('countdown:save', countdowns),
+  acknowledgeCountdownAlert: (id) => ipcRenderer.invoke('countdown:ack', id),
   onScheduler: (callback) => {
     const listener = (_event, snapshot) => callback(snapshot);
     ipcRenderer.on('scheduler:changed', listener);

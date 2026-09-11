@@ -1,0 +1,14 @@
+const assert = require('node:assert/strict');
+const { validateCountdowns, nextCountdownRun, dueCountdownSlot, countdownRemainingMs } = require('../electron/scheduler.cjs');
+const item = { id: 'c1', name: '目标日', targetDate: '2026-09-12', reminderTime: '09:30', enabled: true };
+const at = (day, hour, minute, second = 0) => new Date(2026, 8, day, hour, minute, second);
+assert.deepEqual(validateCountdowns([item]), [item]);
+assert.equal(nextCountdownRun(item, at(11, 8, 0)), at(11, 9, 30).toISOString());
+assert.equal(nextCountdownRun(item, at(11, 10, 0)), at(12, 9, 30).toISOString());
+assert.equal(nextCountdownRun(item, at(12, 10, 0)), null);
+assert.equal(dueCountdownSlot(item, at(11, 9, 30)), +at(11, 9, 30));
+assert.equal(dueCountdownSlot(item, at(11, 9, 30, 6)), null);
+assert.equal(dueCountdownSlot(item, at(11, 9, 30), +at(11, 9, 30)), null);
+assert.equal(countdownRemainingMs(item, at(11, 9, 30)), 14.5 * 60 * 60 * 1000);
+for (const patch of [{ targetDate: '2026-02-30' }, { reminderTime: '24:00' }, { name: '' }, { name: 'x'.repeat(81) }]) assert.throws(() => validateCountdowns([{ ...item, ...patch }]));
+console.log('PASS countdown unit behavior');

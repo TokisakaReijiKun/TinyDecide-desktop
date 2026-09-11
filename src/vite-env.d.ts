@@ -8,6 +8,8 @@ interface Window {
     setAutoStart(enabled: boolean): Promise<import('./types').SchedulerSnapshot>;
     acknowledgeResults(ids: string[]): Promise<import('./types').SchedulerSnapshot>;
     clearScheduledHistory(): Promise<import('./types').SchedulerSnapshot>;
+    saveCountdowns(countdowns: import('./types').CountdownConfig[]): Promise<import('./types').SchedulerSnapshot>;
+    acknowledgeCountdownAlert(id: string): Promise<import('./types').SchedulerSnapshot>;
     onScheduler(callback: (snapshot: import('./types').SchedulerSnapshot) => void): () => void;
   };
 }

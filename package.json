@@ -1,13 +1,14 @@
 {
   "name": "xiaojd-desktop",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "小决定 Desktop",
   "author": "小决定 Desktop",
   "type": "module",
   "main": "electron/main.cjs",
   "scripts": {
     "test": "node --test tests/scheduler.test.cjs",
+    "test:countdown": "node tests/countdown-unit.cjs",
     "test:ui": "node tests/ui.cjs",
     "dev": "vite",
     "build": "tsc && vite build",
@@ -40,7 +41,7 @@
     "appId": "cn.xiaojueding.desktop",
     "productName": "小决定 Desktop",
     "directories": {
-      "output": "release/v0.2.1"
+      "output": "release/v0.3.0"
     },
     "files": [
       "dist/**/*",

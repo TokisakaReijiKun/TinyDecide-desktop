@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { SchedulerSnapshot, WheelConfig } from './types';
 
 export function useScheduler(wheels?: WheelConfig[]) {
-  const [snapshot, setSnapshot] = useState<SchedulerSnapshot>({ schedules: [], results: [], autoStart: false, error: '' });
+  const [snapshot, setSnapshot] = useState<SchedulerSnapshot>({ schedules: [], results: [], countdowns: [], countdownAlert: null, autoStart: false, error: '' });
   const [ready, setReady] = useState(false);
   const [error, setError] = useState('');
   const [syncedWheels, setSyncedWheels] = useState<WheelConfig[] | undefined>();

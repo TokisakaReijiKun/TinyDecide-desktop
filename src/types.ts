@@ -63,6 +63,26 @@ export type ScheduledResult = {
 export type SchedulerSnapshot = {
   schedules: WheelSchedule[];
   results: ScheduledResult[];
+  countdowns: CountdownConfig[];
+  countdownAlert: CountdownAlert | null;
   autoStart: boolean;
   error: string;
+};
+
+export type CountdownConfig = {
+  id: string;
+  name: string;
+  targetDate: string;
+  reminderTime: string;
+  enabled: boolean;
+  nextRunAt?: string | null;
+};
+
+export type CountdownAlert = {
+  id: string;
+  countdownId: string;
+  name: string;
+  targetDate: string;
+  remindedAt: string;
+  acknowledged: boolean;
 };

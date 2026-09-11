@@ -6,6 +6,7 @@ import {
   Coins,
   Edit3,
   History,
+  Hourglass,
   List,
   Minus,
   Plus,
@@ -24,8 +25,9 @@ import { CoinWorkspace } from './CoinWorkspace';
 import { ScheduleWorkspace } from './ScheduleWorkspace';
 import { useScheduler } from './useScheduler';
 import { playSound, setSoundEnabled } from './sound';
+import { CountdownWorkspace } from './CountdownWorkspace';
 
-type AppSection = "wheel" | "number" | "coin" | "schedule" | "history";
+type AppSection = "wheel" | "number" | "coin" | "schedule" | "countdown" | "history";
 
 type WheelSegment = {
   option: WheelOption;
@@ -379,6 +381,7 @@ function App() {
           </button>
           <button className={section === 'coin' ? 'active' : ''} onClick={() => setSection('coin')}><Coins size={20} />抛硬币</button>
           <button className={section === 'schedule' ? 'active' : ''} onClick={() => setSection('schedule')}><Clock3 size={20} />定时转动</button>
+          <button className={section === 'countdown' ? 'active' : ''} onClick={() => setSection('countdown')}><Hourglass size={20} />倒计时</button>
           <button className={section === "history" ? "active" : ""} onClick={() => setSection("history")}>
             <History size={20} />
             历史记录
@@ -447,6 +450,7 @@ function App() {
 
         <div hidden={section !== 'coin'}><CoinWorkspace history={state.history.filter((item) => item.type === 'coin')} onResult={addHistory} soundEnabled={state.soundEnabled} /></div>
         {section === 'schedule' && <ScheduleWorkspace wheels={state.wheels} snapshot={scheduler.snapshot} ready={scheduler.ready} error={scheduler.error} onSnapshot={scheduler.setSnapshot} />}
+        {section === 'countdown' && <CountdownWorkspace snapshot={scheduler.snapshot} ready={scheduler.ready} error={scheduler.error} onSnapshot={scheduler.setSnapshot} />}
 
         {section === "history" && <>{historyError && <p className="number-error" role="alert">{historyError}</p>}<HistoryWorkspace history={history} onClear={() => void clearHistory()} /></>}
       </section>

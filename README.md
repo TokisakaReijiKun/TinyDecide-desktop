@@ -1,6 +1,12 @@
 # 小决定 Desktop
 
-一个本地离线的 Windows 桌面随机决策工具，使用 Electron + React + TypeScript + Vite 构建。当前版本 0.2.1；旧 Tauri 壳仍保留，但每日定时与系统托盘功能使用 Electron。
+一个本地离线的 Windows 桌面随机决策工具，使用 Electron + React + TypeScript + Vite 构建。当前版本 0.3.0；旧 Tauri 壳仍保留，但每日定时、倒计时和系统托盘功能使用 Electron。
+
+## 0.3.0 更新
+
+- 新增倒计时：指定名称、目标日期和每日提醒时刻。
+- 每天到达提醒时刻时弹出剩余天数、时、分、秒；目标日当天显示“目标日期已到”。
+- 倒计时由 Electron 后台计时，主窗口关闭到托盘后仍能提醒；确认提醒后不会重复弹出。
 
 ## 0.2.1 更新
 
@@ -32,6 +38,7 @@
 ```powershell
 conda run -n JK --no-capture-output npm ci
 conda run -n JK --no-capture-output npm test
+conda run -n JK --no-capture-output npm run test:countdown
 conda run -n JK --no-capture-output npm run build
 conda run -n JK --no-capture-output npm run electron:build
 ```
@@ -40,7 +47,9 @@ conda run -n JK --no-capture-output npm run electron:build
 
 0.2.1 交互回归：`conda run -n JK --no-capture-output node tests/interaction-regressions.cjs`，覆盖外部点击、Esc、删除确认、连续重复抽取、同一时刻定时任务和旧结果重启兼容。
 
-免安装主程序为 `release/v0.2.1/win-unpacked/小决定 Desktop.exe`，双击即可运行。必须连同整个目录一起移动。`electron:build` 和 `electron:pack` 均只生成免安装版本。
+倒计时回归：`conda run -n JK --no-capture-output node tests/countdown-regressions.cjs`，覆盖实际 EXE 的倒计时表单、后台提醒弹窗、剩余时长、确认和重启持久化。
+
+免安装主程序为 `release/v0.3.0/win-unpacked/小决定 Desktop.exe`，双击即可运行。必须连同整个目录一起移动。`electron:build` 和 `electron:pack` 均只生成免安装版本。
 
 ## 开发运行
 
@@ -68,7 +77,7 @@ conda run -n JK --no-capture-output npm run electron:build
 如果 electron-builder 的目录打包受网络或安全软件影响，也可以使用当前已生成的免安装版：
 
 ```text
-release/v0.2.1/win-unpacked/小决定 Desktop.exe
+release/v0.3.0/win-unpacked/小决定 Desktop.exe
 ```
 
 ### Tauri 路线（需要 Rust/Cargo 和 Visual Studio Build Tools）
